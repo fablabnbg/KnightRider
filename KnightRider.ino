@@ -1,7 +1,7 @@
-/* Knight Rider 1
+/* Knight Rider 2
  * --------------
  *
- * Basically an extension of Blink_LED.
+ * Reducing the amount of code using for(;;).
  *
  *
  * (cleft) 2005 K3, Malmo University
@@ -9,72 +9,30 @@
  * @hardware: David Cuartielles, Aaron Hallborg
  */
 
-int pin2 = 2;
-int pin3 = 3;
-int pin4 = 4;
-int pin5 = 5;
-int pin6 = 6;
-int pin7 = 7;
+int pinArray[] = {2, 3, 4, 5, 6, 7};
+int count = 0;
 int timer = 100;
 
 void setup(){
-  pinMode(pin2, OUTPUT);
-  pinMode(pin3, OUTPUT);
-  pinMode(pin4, OUTPUT);
-  pinMode(pin5, OUTPUT);
-  pinMode(pin6, OUTPUT);
-  pinMode(pin7, OUTPUT);
+  // we make all the declarations at once
+  for (count=0;count<6;count++) {
+    pinMode(pinArray[count], OUTPUT);
+  }
 }
 
 void loop() {
-   digitalWrite(pin2, HIGH);
+  for (count=0;count<6;count++) {
+   digitalWrite(pinArray[count], HIGH);
    delay(timer);
-   digitalWrite(pin2, LOW);
+   digitalWrite(pinArray[count], LOW);
    delay(timer);
-
-   digitalWrite(pin3, HIGH);
+  }
+  for (count=5;count>=0;count--) {
+   digitalWrite(pinArray[count], HIGH);
    delay(timer);
-   digitalWrite(pin3, LOW);
+   digitalWrite(pinArray[count], LOW);
    delay(timer);
-
-   digitalWrite(pin4, HIGH);
-   delay(timer);
-   digitalWrite(pin4, LOW);
-   delay(timer);
-
-   digitalWrite(pin5, HIGH);
-   delay(timer);
-   digitalWrite(pin5, LOW);
-   delay(timer);
-
-   digitalWrite(pin6, HIGH);
-   delay(timer);
-   digitalWrite(pin6, LOW);
-   delay(timer);
-
-   digitalWrite(pin7, HIGH);
-   delay(timer);
-   digitalWrite(pin7, LOW);
-   delay(timer);
-
-   digitalWrite(pin6, HIGH);
-   delay(timer);
-   digitalWrite(pin6, LOW);
-   delay(timer);
-
-   digitalWrite(pin5, HIGH);
-   delay(timer);
-   digitalWrite(pin5, LOW);
-   delay(timer);
-
-   digitalWrite(pin4, HIGH);
-   delay(timer);
-   digitalWrite(pin4, LOW);
-   delay(timer);
-
-   digitalWrite(pin3, HIGH);
-   delay(timer);
-   digitalWrite(pin3, LOW);
-   delay(timer);
+  }
 }
+
 
