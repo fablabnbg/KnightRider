@@ -1,7 +1,7 @@
-/* Knight Rider 2
+/* Knight Rider 3
  * --------------
  *
- * Reducing the amount of code using for(;;).
+ * This example concentrates on making the visuals fluid.
  *
  *
  * (cleft) 2005 K3, Malmo University
@@ -9,40 +9,32 @@
  * @hardware: David Cuartielles, Aaron Hallborg
  */
 
-/* use more descriptive names for pin assignment */
-#define LED1    2
-#define LED2    3
-#define LED3    4
-#define LED4    5
-#define LED5    6
-#define LED6    7
-
-int pinArray[] = {PIN1, PIN2, PIN3, PIN4, PIN5, PIN6};
-#define MAX_LEDS    ( sizeof(pinArray) / sizeof(pinArray[0]) )
-int timer = 100;
+int pinArray[] = {2, 3, 4, 5, 6, 7};
+int count = 0;
+int timer = 30;
 
 void setup(){
-  int count = 0;
-  // we make all the declarations at once
-  for (count=0;count<MAX_LEDS;count++) {
+  for (count=0;count<6;count++) {
     pinMode(pinArray[count], OUTPUT);
   }
 }
 
 void loop() {
-  int count = 0;
-  for (count=0;count<MAX_LEDS;count++) {
+  for (count=0;count<5;count++) {
    digitalWrite(pinArray[count], HIGH);
    delay(timer);
-   digitalWrite(pinArray[count], LOW);
+   digitalWrite(pinArray[count + 1], HIGH);
    delay(timer);
+   digitalWrite(pinArray[count], LOW);
+   delay(timer*2);
   }
-  for (count=MAX_LEDS-1;count>=0;count--) {
+  for (count=5;count>0;count--) {
    digitalWrite(pinArray[count], HIGH);
    delay(timer);
-   digitalWrite(pinArray[count], LOW);
+   digitalWrite(pinArray[count - 1], HIGH);
    delay(timer);
+   digitalWrite(pinArray[count], LOW);
+   delay(timer*2);
   }
 }
-
 
