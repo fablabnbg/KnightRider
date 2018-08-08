@@ -2,7 +2,7 @@
  * --------------
  *
  * function:
- * 
+ *
  * use a byte(8bit) variable LEDS to store the state of the 8 LEDS
  * LED assignment from LED7..LED0 assigned bit 2^8..2^0
  * We have pins for shift-in(INPUT) and a shift-out(OUTPUT)
@@ -19,7 +19,7 @@
 // for HIGH_ACTIVE  the wiring is pin - resistor - LED - GND
 // for LOW_ACTIVE   the wiring is VCC - resistor - LED - pin
 //#define LED_HIGH_ACTIVE    true
-#define LED_HIGH_ACTIVE    false  
+#define LED_HIGH_ACTIVE    false
 
 // This configuration control the direction of the shift left/right
 #define SHIFT_DIR_LEFT      true
@@ -44,15 +44,15 @@
 #define SERIAL_SPEED    115200
 
 uint16_t LEDS   = 0xff;     // START WITH ALL LEDW
-int LEDArray[]  = { 
-    PIN_LED0, 
+int LEDArray[]  = {
+    PIN_LED0,
     PIN_LED1,
     PIN_LED2,
     PIN_LED3,
     PIN_LED4,
     PIN_LED5,
     PIN_LED6,
-    PIN_LED7 
+    PIN_LED7
 };
 #define MAX_LEDS    ( sizeof(LEDArray) / sizeof(LEDArray[0]) )
 
@@ -127,7 +127,7 @@ int Shift( uint16_t *pShift_val, unsigned shift_in, unsigned shift_dir ) {
         shift_reg <<= 1;                            // left shift register value
         shift_reg |= shift_in ? 1 : 0 ;             // insert shift_in value at LSB position
     }
-    else {  // (SHIFT_DIR_RIGHT == shift_dir )  
+    else {  // (SHIFT_DIR_RIGHT == shift_dir )
         mask        = 1;                            // LSB lowest bit will be shiftet out
         shift_out   = (mask & shift_reg) ? 1 : 0 ;  // extract bit value
         shift_reg   >>= 1;                          // right shift register value
@@ -139,16 +139,16 @@ int Shift( uint16_t *pShift_val, unsigned shift_in, unsigned shift_dir ) {
 
 // ====================================
 void loop() {
-    static uint32_t         shift_cnt   = 0;   
-    static unsigned long    prevMillis  = 0; 
+    static uint32_t         shift_cnt   = 0;
+    static unsigned long    prevMillis  = 0;
     static unsigned long    loop_cnt    = 0;
 
     unsigned long           currMillis = millis();
     unsigned long           diff       = currMillis - prevMillis;
     int shift_in;
     int shift_out;
-    
-    loop_cnt++; 
+
+    loop_cnt++;
     shift_in   = digitalRead( PIN_LED_IN );
     shift_cnt += shift_in ? 1 : 0;          // accumulate how often pin is high
 
@@ -165,8 +165,8 @@ void loop() {
         update_LEDS( LEDS );
         Serial.print(" SO=");
         Serial.println(shift_out);
-       
-       
+
+
         shift_cnt = 0;      // reset debouncing counter
         loop_cnt  = 0;
     }
