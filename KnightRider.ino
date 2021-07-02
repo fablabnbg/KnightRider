@@ -109,7 +109,6 @@ void update_LEDS( unsigned leds) {
  *                  - false shift right pShift_val and insert input at position 2^7
  * RETURN:          - 0|1 bit which was shifted out depending on direction left/right
  *                  - -1 on ERROR
-
  */
 int Shift( uint16_t *pShift_val, unsigned shift_in, unsigned shift_dir ) {
     unsigned shift_reg;
@@ -165,7 +164,6 @@ void loop() {
         update_LEDS( LEDS );
         Serial.print(" SO=");
         Serial.println(shift_out);
-
 
         shift_cnt = 0;      // reset debouncing counter
         loop_cnt  = 0;
